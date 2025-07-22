@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <title>🌎 🌎 🌎 </title>
-  <meta name="description" content="I dont know what to write here">
+  <meta name="description" content="A selection of maps exploring terrain, place, and design.">
   <style>
     body {
       font-family: "Inter", sans-serif;
@@ -22,6 +21,7 @@
     img {
       width: 100%;
       margin: 1rem 0;
+      cursor: pointer;
     }
     .grid {
       display: grid;
@@ -64,57 +64,92 @@
       white-space: nowrap;
       border: 0;
     }
+
+    /* Lightbox styles */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    .lightbox.visible {
+      visibility: visible;
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
 
   <div class="header">
-
-    <p style="font-size: 0.95rem; max-width: 600px; margin: 1rem auto;"></p>
+    <p style="font-size: 0.95rem; max-width: 600px; margin: 1rem auto;">
+      Hi, I’m a designer and mapmaker. These are selected works exploring terrain, bioregional thinking, and visual clarity. 
+    </p>
   </div>
 
   <h2>Selected Works</h2>
   <div class="grid">
     <div class="map-card">
-      <a href="helens.webp" target="_blank">
-        <img src="helens.webp" alt="Mount St. Helens">
-      </a>
+      <img src="helens.webp" alt="Mount St. Helens" data-full="helens.webp">
       <div class="caption">Mount St. Helens: Planometric-oblique shaded relief using 1 arc-second SRTM DEM, styled in ArcGIS Pro with custom color ramp.</div>
     </div>
     <div class="map-card">
-      <a href="scotland.webp" target="_blank">
-        <img src="scotland.webp" alt="Scotland Map">
-      </a>
+      <img src="scotland.webp" alt="Scotland Map" data-full="scotland.webp">
       <div class="caption">Scotland: Regionally focused relief and political hybrid map designed for visual clarity and thematic emphasis.</div>
     </div>
     <div class="map-card">
-      <a href="SalishSea.webp" target="_blank">
-        <img src="SalishSea.webp" alt="Salish Sea">
-      </a>
+      <img src="SalishSea.webp" alt="Salish Sea" data-full="SalishSea.webp">
       <div class="caption">Salish Sea Bioregional Sanctuary: Conceptual regional map advocating watershed-based governance and conservation.</div>
     </div>
     <div class="map-card">
-      <a href="ireland.webp" target="_blank">
-        <img src="ireland.webp" alt="Ireland Map">
-      </a>
+      <img src="ireland.webp" alt="Ireland Map" data-full="ireland.webp">
       <div class="caption">Ireland (Reproduction): Vintage-style educational map designed in QGIS with historical symbology and color palette.</div>
     </div>
     <div class="map-card">
-      <a href="hood.webp" target="_blank">
-        <img src="hood.webp" alt="Mt. Hood">
-      </a>
+      <img src="hood.webp" alt="Mt. Hood" data-full="hood.webp">
       <div class="caption">Mt. Hood: Stylized shaded relief representation with high contrast DEM layering and terrain-focused visualization.</div>
     </div>
     <div class="map-card">
-      <a href="southcascades.webp" target="_blank">
-        <img src="southcascades.webp" alt="South Cascades">
-      </a>
+      <img src="southcascades.webp" alt="South Cascades" data-full="southcascades.webp">
       <div class="caption">South Cascades: High-resolution shaded relief map highlighting the region's volcanic and glacial terrain features.</div>
     </div>
   </div>
 
   <footer>
-    <p>ok bye</a></p>
+    <p>ok bye</p>
   </footer>
+
+  <!-- Lightbox container -->
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Full view">
+  </div>
+
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = lightbox.querySelector("img");
+
+    document.querySelectorAll("[data-full]").forEach(img => {
+      img.addEventListener("click", () => {
+        lightboxImg.src = img.getAttribute("data-full");
+        lightbox.classList.add("visible");
+      });
+    });
+
+    lightbox.addEventListener("click", () => {
+      lightbox.classList.remove("visible");
+      lightboxImg.src = "";
+    });
+  </script>
+
 </body>
 </html>
