@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drawings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background: #fff;
+      color: #111;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    h1, h2 {
+      font-weight: 50;
+    }
+
+    img {
+      width: 100%;
+      margin: 1rem 0;
+      cursor: pointer;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .caption {
+      font-size: 0.9rem;
+      color: #444;
+      margin-top: 0.5rem;
+    }
+
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.visible {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .lightbox-inner {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .lightbox img {
+      width: auto;
+      height: auto;
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 1rem;
+      transition: color 0.2s ease;
+    }
+
+    .lightbox-button:hover {
+      color: #aaa;
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h2>Drawings</h2>
+    <p style="font-size: 0.95rem; max-width: 600px; margin: 1rem auto;">
+      A selection of pencil drawings, sketches, and doodles made over the years.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div>
+      <img src="drawings/Confused Alone.webp" data-full="drawings/Confused Alone.webp" alt="Confused Alone">
+      <div class="caption">Confused Alone</div>
+    </div>
+    <div>
+      <img src="drawings/Eye Tree.webp" data-full="drawings/Eye Tree.webp" alt="Eye Tree">
+      <div class="caption">Eye Tree</div>
+    </div>
+    <div>
+      <img src="drawings/IMG_6665.webp" data-full="drawings/IMG_6665.webp" alt="Sketch 6665">
+      <div class="caption">Sketch: IMG_6665</div>
+    </div>
+    <div>
+      <img src="drawings/IMG_6754.webp" data-full="drawings/IMG_6754.webp" alt="Sketch 6754">
+      <div class="caption">Sketch: IMG_6754</div>
+    </div>
+    <div>
+      <img src="drawings/IMG_6755.webp" data-full="drawings/IMG_6755.webp" alt="Sketch 6755">
+      <div class="caption">Sketch: IMG_6755</div>
+    </div>
+    <div>
+      <img src="drawings/IMG_6758.webp" data-full="drawings/IMG_6758.webp" alt="Sketch 6758">
+      <div class="caption">Sketch: IMG_6758</div>
+    </div>
+    <div>
+      <img src="drawings/IMG_6760.webp" data-full="drawings/IMG_6760.webp" alt="Sketch 6760">
+      <div class="caption">Sketch: IMG_6760</div>
+    </div>
+    <div>
+      <img src="drawings/IMG_6761.webp" data-full="drawings/IMG_6761.webp" alt="Sketch 6761">
+      <div class="caption">Sketch: IMG_6761</div>
+    </div>
+    <div>
+      <img src="drawings/IMG_6762.webp" data-full="drawings/IMG_6762.webp" alt="Sketch 6762">
+      <div class="caption">Sketch: IMG_6762</div>
+    </div>
+    <div>
+      <img src="drawings/Octopus in Space.webp" data-full="drawings/Octopus in Space.webp" alt="Octopus in Space">
+      <div class="caption">Octopus in Space</div>
+    </div>
+    <div>
+      <img src="drawings/PRESENT.webp" data-full="drawings/PRESENT.webp" alt="PRESENT">
+      <div class="caption">PRESENT</div>
+    </div>
+    <div>
+      <img src="drawings/WhatTown.webp" data-full="drawings/WhatTown.webp" alt="WhatTown">
+      <div class="caption">WhatTown</div>
+    </div>
+    <div>
+      <img src="drawings/WoodWobbles.webp" data-full="drawings/WoodWobbles.webp" alt="WoodWobbles">
+      <div class="caption">WoodWobbles</div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-inner">
+      <button class="lightbox-button" id="prevBtn">◀</button>
+      <img src="" alt="Full view" id="lightbox-img">
+      <button class="lightbox-button" id="nextBtn">▶</button>
+    </div>
+  </div>
+
+  <footer>
+    <p><a href="index.html">← Back to maps</a></p>
+  </footer>
+
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const imageElements = document.querySelectorAll("[data-full]");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    let currentIndex = -1;
+
+    function showImage(index) {
+      const src = imageElements[index].getAttribute("data-full");
+      lightboxImg.src = src;
+      currentIndex = index;
+      lightbox.classList.add("visible");
+    }
+
+    imageElements.forEach((img, index) => {
+      img.addEventListener("click", () => showImage(index));
+    });
+
+    lightbox.addEventListener("click", (e) => {
+      if (!e.target.closest("img") && !e.target.classList.contains("lightbox-button")) {
+        lightbox.classList.remove("visible");
+        lightboxImg.src = "";
+      }
+    });
+
+    prevBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + imageElements.length) % imageElements.length;
+      showImage(currentIndex);
+    });
+
+    nextBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % imageElements.length;
+      showImage(currentIndex);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.classList.contains("visible")) return;
+      if (e.key === "ArrowRight") {
+        currentIndex = (currentIndex + 1) % imageElements.length;
+        showImage(currentIndex);
+      }
+      if (e.key === "ArrowLeft") {
+        currentIndex = (currentIndex - 1 + imageElements.length) % imageElements.length;
+        showImage(currentIndex);
+      }
+      if (e.key === "Escape") {
+        lightbox.classList.remove("visible");
+        lightboxImg.src = "";
+      }
+    });
+  </script>
+
+</body>
+</html>
