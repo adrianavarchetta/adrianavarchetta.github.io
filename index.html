@@ -64,6 +64,27 @@
       white-space: nowrap;
       border: 0;
     }
+    .lightbox-nav {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 90vw;
+      margin-top: 1rem;
+    }
+    
+    .lightbox-button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      transition: color 0.2s ease;
+    }
+    
+    .lightbox-button:hover {
+      color: #aaa;
+    }
 
     /* Lightbox styles */
     .lightbox {
@@ -132,27 +153,67 @@
     <p>ok bye</p>
   </footer>
 
-  <!-- Lightbox container -->
-  <div class="lightbox" id="lightbox">
-    <img src="" alt="Full view">
+
+<!-- Lightbox container -->
+<div class="lightbox" id="lightbox">
+  <img src="" alt="Full view">
+  <div class="lightbox-nav">
+    <button class="lightbox-button" id="prevBtn">◀ Prev</button>
+    <button class="lightbox-button" id="nextBtn">Next ▶</button>
   </div>
+</div>
 
-  <script>
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = lightbox.querySelector("img");
+<script>
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = lightbox.querySelector("img");
+  const imageElements = document.querySelectorAll("[data-full]");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  let currentIndex = -1;
 
-    document.querySelectorAll("[data-full]").forEach(img => {
-      img.addEventListener("click", () => {
-        lightboxImg.src = img.getAttribute("data-full");
-        lightbox.classList.add("visible");
-      });
-    });
+  function showImage(index) {
+    const src = imageElements[index].getAttribute("data-full");
+    lightboxImg.src = src;
+    currentIndex = index;
+    lightbox.classList.add("visible");
+  }
 
-    lightbox.addEventListener("click", () => {
+  imageElements.forEach((img, index) => {
+    img.addEventListener("click", () => showImage(index));
+  });
+
+  lightbox.addEventListener("click", (e) => {
+    if (!e.target.closest("img") && !e.target.classList.contains("lightbox-button")) {
       lightbox.classList.remove("visible");
       lightboxImg.src = "";
-    });
-  </script>
+    }
+  });
 
-</body>
-</html>
+  prevBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    currentIndex = (currentIndex - 1 + imageElements.length) % imageElements.length;
+    showImage(currentIndex);
+  });
+
+  nextBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    currentIndex = (currentIndex + 1) % imageElements.length;
+    showImage(currentIndex);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("visible")) return;
+    if (e.key === "ArrowRight") {
+      currentIndex = (currentIndex + 1) % imageElements.length;
+      showImage(currentIndex);
+    }
+    if (e.key === "ArrowLeft") {
+      currentIndex = (currentIndex - 1 + imageElements.length) % imageElements.length;
+      showImage(currentIndex);
+    }
+    if (e.key === "Escape") {
+      lightbox.classList.remove("visible");
+      lightboxImg.src = "";
+    }
+  });
+</script>
