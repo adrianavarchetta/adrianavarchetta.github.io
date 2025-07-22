@@ -79,8 +79,11 @@
       transition: opacity 0.3s ease;
     }
     .lightbox img {
-      max-width: 90%;
-      max-height: 90%;
+      width: auto;
+      height: auto;
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
     .lightbox.visible {
