@@ -258,12 +258,14 @@
     const nextBtn = document.getElementById("nextBtn");
     let currentIndex = -1;
 
-    function showImage(index) {
-      const src = imageElements[index].getAttribute("data-full");
-      lightboxImg.src = src;
-      currentIndex = index;
-      lightbox.classList.add("visible");
-    }
+function showImage(index) {
+  const imgEl = imageElements[index];
+  const src = imgEl.getAttribute("data-full") || imgEl.src;  // fallback to src
+  lightboxImg.src = src;
+  currentIndex = index;
+  lightbox.classList.add("visible");
+}
+
 
     imageElements.forEach((img, index) => {
       img.addEventListener("click", () => showImage(index));
