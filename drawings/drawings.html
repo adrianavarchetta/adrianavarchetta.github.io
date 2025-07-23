@@ -1,1 +1,250 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <title>Drawings</title>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background: #ffffff;
+      color: #111;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    h1, h2 {
+      font-weight: 50;
+    }
+    img {
+      width: 100%;
+      margin: 1rem 0;
+      cursor: pointer;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .map-card {
+      display: flex;
+      flex-direction: column;
+    }
+    .caption {
+      font-size: 0.9rem;
+      color: #444;
+      margin-top: 0.5rem;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    a.back-link {
+      text-align: center;
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #555;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h2>Drawings</h2>
+    <a class="back-link" href="index.html">← Back to Maps</a>
+  </div>
+
+  <div class="grid">
+    <!-- Repeat block for each drawing -->
+    <!-- Example: -->
+    <div class="map-card">
+      <img src="drawings/All Eyes.webp" alt="All Eyes" />
+      <div class="caption">All Eyes</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Cities in the Clouds.webp" alt="Cities in the Clouds" />
+      <div class="caption">Cities in the Clouds</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Clutching the Gaze.webp" alt="Clutching the Gaze" />
+      <div class="caption">Clutching the Gaze</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Concrete Eden.webp" alt="Concrete Eden" />
+      <div class="caption">Concrete Eden</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Curls of the Cyclops.webp" alt="Curls of the Cyclops" />
+      <div class="caption">Curls of the Cyclops</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Detonation.webp" alt="Detonation" />
+      <div class="caption">Detonation</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Disassembly.webp" alt="Disassembly" />
+      <div class="caption">Disassembly</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Garden of Variety.webp" alt="Garden of Variety" />
+      <div class="caption">Garden of Variety</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Mechanical Tracks.webp" alt="Mechanical Tracks" />
+      <div class="caption">Mechanical Tracks</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Ms. Borque's Burden.webp" alt="Ms. Borque's Burden" />
+      <div class="caption">Ms. Borque's Burden</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/My Favorite Clouds.webp" alt="My Favorite Clouds" />
+      <div class="caption">My Favorite Clouds</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Red Static.webp" alt="Red Static" />
+      <div class="caption">Red Static</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Rest in Pattern.webp" alt="Rest in Pattern" />
+      <div class="caption">Rest in Pattern</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Seattle 2021.webp" alt="Seattle 2021" />
+      <div class="caption">Seattle 2021</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Shock Bloom.webp" alt="Shock Bloom" />
+      <div class="caption">Shock Bloom</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Shrimp Mind.webp" alt="Shrimp Mind" />
+      <div class="caption">Shrimp Mind</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Signal Overload.webp" alt="Signal Overload" />
+      <div class="caption">Signal Overload</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Sloppy Goo.webp" alt="Sloppy Goo" />
+      <div class="caption">Sloppy Goo</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Space Garbage Reverie.webp" alt="Space Garbage Reverie" />
+      <div class="caption">Space Garbage Reverie</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Space Traveler.webp" alt="Space Traveler" />
+      <div class="caption">Space Traveler</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Static Field.webp" alt="Static Field" />
+      <div class="caption">Static Field</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Tenement Drift.webp" alt="Tenement Drift" />
+      <div class="caption">Tenement Drift</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/The Cellar Door.webp" alt="The Cellar Door" />
+      <div class="caption">The Cellar Door</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/The Gift Receiver.webp" alt="The Gift Receiver" />
+      <div class="caption">The Gift Receiver</div>
+    </div>
+
+    <div class="map-card">
+      <img src="drawings/Unnamed Icons.webp" alt="Unnamed Icons" />
+      <div class="caption">Unnamed Icons</div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <footer>
+    <p>ok bye</p>
+  </footer>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    document.querySelectorAll('.map-card img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    lightbox.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+      lightboxImg.src = '';
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === "Escape") {
+        lightbox.style.display = 'none';
+        lightboxImg.src = '';
+      }
+    });
+  </script>
+</body>
+</html>
